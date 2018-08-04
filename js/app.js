@@ -1,4 +1,4 @@
-ole.log('Hello world');
+console.log('Hello world');
 
 // Starts the game on click
 function startGame() {
@@ -35,13 +35,23 @@ function nextMove(cell) {
 
 // Switch turn function
 function switchTurn() {
+
 	if (checkForWin(document.turn)) {
+
 		setMessage("Congrats, " + document.turn + "! You win!");
 		document.winner = document.turn;
-	} else if (document.turn == "X") {
+	} 
+	else if(checkForTie()) {
+		setMessage("Its a tie! Try again!");
+	}
+
+	else if (document.turn == "X") {
+
 		document.turn = "O";
 		setMessage("It's " + document.turn + "'s turn!");
-	} else {
+	} 
+	else {
+
 		document.turn = "X";
 		setMessage("It's " + document.turn + "'s turn!");
 	}
@@ -81,3 +91,11 @@ function getCell(number) {
 function clearCell(number) {
 	document.getElementById("c" + number).innerText = "";
 }
+
+function checkForTie() {
+	for(var i = 1; i < 10; i++) {
+		if(getCell(i) == "")
+			return false;
+	}
+	return true;
+};
